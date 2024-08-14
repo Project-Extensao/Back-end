@@ -12,7 +12,6 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
 model Projeto {
   id_projeto          Int      @id @default(autoincrement())
   modalidade          String
@@ -23,13 +22,13 @@ model Projeto {
   linha_tematica      String
   coord_projeto       String
   email_coord_projeto String
-  dt_inicio_proj      DateTime
-  dt_fim_proj         DateTime
+  dt_inicio_proj      DateTime @db.Date // Armazena apenas a data
+  dt_fim_proj         DateTime @db.Date // Armazena apenas a data
   situacao            String
-  ult_alter_proj      DateTime
+  ult_alter_proj      DateTime @db.Date // Armazena apenas a data
   palavras_chave      String
   resumo              String
-  parcerias           String? // Permite valores nulos
+  parcerias           String?
 
-  @@map("projetos") // Opcional: Mapeia o nome da tabela no banco de dados, se for diferente do nome do modelo
+  @@map("projetos")
 }
