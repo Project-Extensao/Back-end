@@ -1,7 +1,7 @@
 // src/routes/index.ts
 
 import { Router } from "express";
-import { projetosRoutes } from "./projetos.routes"; // Certifique-se de que o caminho está correto
+import { projetosRoutes } from "./projetos.routes"; 
 
 const routes = Router();
 

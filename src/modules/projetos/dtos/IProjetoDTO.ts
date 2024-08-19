@@ -1,6 +1,6 @@
 // src/dto/CreateProjetosDTO.ts
 
-export interface CreateProjetosDTO {
+export default interface IProjetoDTO {
     modalidade: string;
     unidade_origem: string;
     titulo_projeto: string;

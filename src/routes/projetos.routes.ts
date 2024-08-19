@@ -1,19 +1,23 @@
+// src/routes/projetosRoutes.ts
 import { Router } from "express";
-import { CreatedProjetosController } from "../modules/projetos/projetosCases/createProjetos/CreatedProjetosController";
-import { UpdateProjetosController } from "../modules/projetos/projetosCases/createProjetos/updateProjetosController";
-import { DeleteProjetosController } from "../modules/projetos/projetosCases/createProjetos/deleteProjetosController";
-import { GetProjetosController } from "../modules/projetos/projetosCases/getProjetos/getProjetosController";
+import ProjetosController from "../modules/projetos/infra/Controller/ProjetoController";
 
 const projetosRoutes = Router();
-const createdProjetosController = new CreatedProjetosController();
-const updateProjetosController = new UpdateProjetosController();
-const deleteProjetosController = new DeleteProjetosController();
-const getProjetosController = new GetProjetosController();
+const projetosController = new ProjetosController();
 
-// Rotas para projetos
-projetosRoutes.post("/", createdProjetosController.handle.bind(createdProjetosController));
-projetosRoutes.put("/:id_projeto", updateProjetosController.handle.bind(updateProjetosController));
-projetosRoutes.delete("/:id_projeto", deleteProjetosController.handle.bind(deleteProjetosController));
-projetosRoutes.get("/:id_projeto?", getProjetosController.handle.bind(getProjetosController));
+// Rota para criar um novo projeto
+projetosRoutes.post("/", projetosController.create.bind(projetosController));
+
+// Rota para atualizar um projeto existente
+projetosRoutes.put("/:id", projetosController.update.bind(projetosController));
+
+// Rota para deletar um projeto existente
+projetosRoutes.delete("/:id", projetosController.delete.bind(projetosController));
+
+// Rota para listar todos os projetos
+projetosRoutes.get("/", projetosController.getAll.bind(projetosController));
+
+// Rota para buscar um projeto específico
+projetosRoutes.get("/:id", projetosController.getOne.bind(projetosController));
 
 export { projetosRoutes };

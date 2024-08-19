@@ -1,9 +1,16 @@
 
 // src/server.ts
+import 'reflect-metadata';
+
 import "express-async-errors";
+
 import express, { Request, Response, NextFunction } from "express";
 import { routes } from "./routes/index";
-import { AppError } from "../src/errors/AppErros"; // Certifique-se de ter um arquivo AppError.ts ou ajuste o caminho conforme necessário
+import { AppError } from "../src/errors/AppErros"; 
+import "@prisma/client";
+import './modules/projetos/container/index'; 
+
+
 
 
 const app = express();
