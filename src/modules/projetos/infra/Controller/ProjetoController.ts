@@ -5,6 +5,9 @@ import DeleteProjetoService from "../services/DeleteProjetoService";
 import FindOneProjetoService from "../services/FindOneProjetoService";
 import ListProjetoService from "../services/ListProjetoService";
 import UpdateProjetoService from "../services/UpdateProjetoService";
+import FilterProjetoService from "../services/FilterProjetoService";
+import ProjetoFilter from "../../Filters/ProjetoFilter";
+
 
 export default class ProjetosController {
     public async create(req: Request, res: Response): Promise<Response> {
@@ -147,6 +150,19 @@ export default class ProjetosController {
             } else {
                 return res.status(500).json({ error: 'An unknown error occurred' });
             }
+        }
+    }
+
+    public async getFiltered(req: Request, res: Response): Promise<Response> {
+        const filterProjetoService = container.resolve(FilterProjetoService);
+        const filters = req.query; // Captura os filtros da query string
+
+        try {
+            const projetos = await filterProjetoService.execute(filters);
+
+            return res.status(200).json(projetos);
+        } catch (error) {
+            return res.status(500).json({ error: (error as Error).message || 'An unknown error occurred' });
         }
     }
 }

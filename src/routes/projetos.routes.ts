@@ -20,4 +20,8 @@ projetosRoutes.get("/", projetosController.getAll.bind(projetosController));
 // Rota para buscar um projeto específico
 projetosRoutes.get("/:id", projetosController.getOne.bind(projetosController));
 
+projetosRoutes.get("/filter", projetosController.getFiltered.bind(projetosController));
+
 export { projetosRoutes };
+//Finalizado
+//Registrado

@@ -37,4 +37,38 @@ export default class ProjetoRepository implements IProjetoRepository {
     public async listAll(): Promise<ProjetoEntity[]> {
         return await prisma.projeto.findMany();
     }
+    public async filterProjects(filters: any): Promise<ProjetoEntity[]> {
+        const query: any = {};
+
+        if (filters.situacao) {
+            query.situacao = filters.situacao;
+        }
+
+        if (filters.ano) {
+            query.vigencia = {
+                gte: new Date(`${filters.ano}-01-01`),
+                lte: new Date(`${filters.ano}-12-31`)
+            };
+        }
+
+        if (filters.campus) {
+            query.unidade_origem = filters.campus;
+        }
+
+        if (filters.areaConhecimento) {
+            query.areaConhecimento = filters.areaConhecimento;
+        }
+
+        if (filters.linhaTematica) {
+            query.linhaTematica = filters.linhaTematica;
+        }
+
+        if (filters.modalidade) {
+            query.modalidade = filters.modalidade;
+        }
+
+        return await prisma.projeto.findMany({
+            where: query
+        });
+    }
 }
